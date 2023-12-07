@@ -87,6 +87,6 @@ public class Main {
         //张三退出游戏
         zhangSan.setStrategy(exit);
         zhangSan.execute("张三");
-        System.out.println(" \n \n *************** 观察者模式DEMO结束 *************** \n \n");
+        System.out.println(" \n \n *************** 策略模式DEMO结束 *************** \n \n");
     }
 }
