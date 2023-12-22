@@ -1,4 +1,5 @@
 import observer.*;
+import state.*;
 import strategy.*;
 
 /**
@@ -13,6 +14,8 @@ public class Main {
         observerTest();
         //策略模式执行
         strategyTest();
+        //状态模式执行
+        stateTest();
     }
 
     private static void observerTest() {
@@ -88,5 +91,58 @@ public class Main {
         zhangSan.setStrategy(exit);
         zhangSan.execute("张三");
         System.out.println(" \n \n *************** 策略模式DEMO结束 *************** \n \n");
+    }
+
+    private static void stateTest() {
+        System.out.println("*************** 状态模式DEMO开始 *************** \n \n");
+        //创建具体的环境
+        ElevatorContext elevator = new ElevatorContext();
+        //创建具体的状态
+        OpenDoorState openDoorState = new OpenDoorState();
+        CloseDoorState closeDoorState = new CloseDoorState();
+        RunState runState = new RunState();
+        StopState stopState = new StopState();
+        //电梯初始状态为停止状态
+        elevator.setState(stopState);
+        System.out.println("电梯初始状态为停止状态");
+        //电梯停止状态下，可以开门
+        elevator.openDoor();
+        //电梯停止状态下，可以关门
+        elevator.closeDoor();
+        //电梯停止状态下，可以运行
+        elevator.run();
+        //电梯停止状态下，可以停止
+        elevator.stop();
+        //电梯关门状态下，可以开门
+        elevator.setState(closeDoorState);
+        System.out.println("电梯状态切换为关门状态");
+        elevator.openDoor();
+        //电梯关门状态下，可以关门
+        elevator.closeDoor();
+        //电梯关门状态下，可以运行
+        elevator.run();
+        //电梯关门状态下，可以停止
+        elevator.stop();
+        //电梯运行状态下，可以开门
+        elevator.setState(runState);
+        System.out.println("电梯状态切换为运行状态");
+        elevator.openDoor();
+        //电梯运行状态下，可以关门
+        elevator.closeDoor();
+        //电梯运行状态下，可以运行
+        elevator.run();
+        //电梯运行状态下，可以停止
+        elevator.stop();
+        //电梯开门状态下，可以开门
+        elevator.setState(openDoorState);
+        System.out.println("电梯状态切换为开门状态");
+        elevator.openDoor();
+        //电梯开门状态下，可以关门
+        elevator.closeDoor();
+        //电梯开门状态下，可以运行
+        elevator.run();
+        //电梯开门状态下，可以停止
+        elevator.stop();
+        System.out.println(" \n \n *************** 状态模式DEMO结束 *************** \n \n");
     }
 }
